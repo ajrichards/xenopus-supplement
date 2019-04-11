@@ -1,0 +1,597 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Gene set analysis &mdash; xenopus-supplement 1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Works cited" href="references.html" />
+    <link rel="prev" title="Differential expression analysis" href="de-novo/de-novo-difexp.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> xenopus-supplement
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="de-novo/de-novo.html">Trinity de novo assembly</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="de-novo/de-novo.html#contents">Contents</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="de-novo/de-novo-assembly.html">Assembly</a></li>
+<li class="toctree-l3"><a class="reference internal" href="de-novo/de-novo-difexp.html">Differential expression analysis</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Gene set analysis</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#xenopus-species-without-iea">Xenopus species without IEA</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#xenopus-species-with-iea">Xenopus species with IEA</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">Works cited</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">xenopus-supplement</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="de-novo/de-novo.html">Trinity Assembly without a reference</a> &raquo;</li>
+        
+      <li>Gene set analysis</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/geneset-analysis.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="gene-set-analysis">
+<h1>Gene set analysis<a class="headerlink" href="#gene-set-analysis" title="Permalink to this headline">¶</a></h1>
+<p>Here we identify the gene sets (produced with hts-integrate) that are significantly with significant p-values (FDR threshold = 0.1).</p>
+<div class="section" id="xenopus-species-without-iea">
+<h2>Xenopus species without IEA<a class="headerlink" href="#xenopus-species-without-iea" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="biologcal-process">
+<h3>Biologcal process<a class="headerlink" href="#biologcal-process" title="Permalink to this headline">¶</a></h3>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 8%" />
+<col style="width: 7%" />
+<col style="width: 11%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 38%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>gene-set</p></th>
+<th class="head"><p>genes</p></th>
+<th class="head"><p>transcripts</p></th>
+<th class="head"><p>build</p></th>
+<th class="head"><p>dir.</p></th>
+<th class="head"><p>aspect</p></th>
+<th class="head"><p>p-value</p></th>
+<th class="head"><p>FDR</p></th>
+<th class="head"><p>top-terms</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>gs-11</p></td>
+<td><p>7</p></td>
+<td><p>142</p></td>
+<td><p>dn</p></td>
+<td><p>neg</p></td>
+<td><p>bp</p></td>
+<td><p>0.0</p></td>
+<td><p>0.0</p></td>
+<td><p>free ubiquitin chain polymerization</p></td>
+</tr>
+<tr class="row-odd"><td><p>gs-4</p></td>
+<td><p>18</p></td>
+<td><p>105</p></td>
+<td><p>ref</p></td>
+<td><p>neg</p></td>
+<td><p>bp</p></td>
+<td><p>0.0</p></td>
+<td><p>0.0</p></td>
+<td><p>positive regulation of DNA repair</p></td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="gene-set-figures">
+<h4>Gene set figures<a class="headerlink" href="#gene-set-figures" title="Permalink to this headline">¶</a></h4>
+<a class="reference internal image-reference" href="_images/x-noiea-bp-gs-11.png"><img alt="_images/x-noiea-bp-gs-11.png" src="_images/x-noiea-bp-gs-11.png" style="width: 30%;" /></a>
+<a class="reference internal image-reference" href="_images/x-noiea-bp-gs-4.png"><img alt="_images/x-noiea-bp-gs-4.png" src="_images/x-noiea-bp-gs-4.png" style="width: 30%;" /></a>
+</div>
+</div>
+<div class="section" id="molecular-function">
+<h3>Molecular function<a class="headerlink" href="#molecular-function" title="Permalink to this headline">¶</a></h3>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 8%" />
+<col style="width: 7%" />
+<col style="width: 11%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 38%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>gene-set</p></th>
+<th class="head"><p>genes</p></th>
+<th class="head"><p>transcripts</p></th>
+<th class="head"><p>build</p></th>
+<th class="head"><p>dir.</p></th>
+<th class="head"><p>aspect</p></th>
+<th class="head"><p>p-value</p></th>
+<th class="head"><p>FDR</p></th>
+<th class="head"><p>top-terms</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>gs-109</p></td>
+<td><p>17</p></td>
+<td><p>185</p></td>
+<td><p>dn</p></td>
+<td><p>neg</p></td>
+<td><p>mf</p></td>
+<td><p>0.0</p></td>
+<td><p>0.0</p></td>
+<td><p>microtubule binding</p></td>
+</tr>
+<tr class="row-even"><td><p>gs-151</p></td>
+<td><p>6</p></td>
+<td><p>43</p></td>
+<td><p>dn</p></td>
+<td><p>neg</p></td>
+<td><p>mf</p></td>
+<td><p>0.0</p></td>
+<td><p>0.0</p></td>
+<td><p>oligosaccharyl transferase activity</p></td>
+</tr>
+<tr class="row-odd"><td><p>gs-95</p></td>
+<td><p>2</p></td>
+<td><p>21</p></td>
+<td><p>gg</p></td>
+<td><p>neg</p></td>
+<td><p>mf</p></td>
+<td><p>0.0</p></td>
+<td><p>0.0</p></td>
+<td><p>estrogen receptor binding</p></td>
+</tr>
+<tr class="row-even"><td><p>gs-66</p></td>
+<td><p>6</p></td>
+<td><p>37</p></td>
+<td><p>gg</p></td>
+<td><p>pos</p></td>
+<td><p>mf</p></td>
+<td><p>0.0</p></td>
+<td><p>0.0</p></td>
+<td><p>L-alanine:2-oxoglutarate aminotransferase …</p></td>
+</tr>
+<tr class="row-odd"><td><p>gs-139</p></td>
+<td><p>1</p></td>
+<td><p>24</p></td>
+<td><p>ref</p></td>
+<td><p>neg</p></td>
+<td><p>mf</p></td>
+<td><p>0.0</p></td>
+<td><p>0.0</p></td>
+<td><p>ubiquitin-protein transferase activity</p></td>
+</tr>
+<tr class="row-even"><td><p>gs-37</p></td>
+<td><p>85</p></td>
+<td><p>424</p></td>
+<td><p>ref</p></td>
+<td><p>neg</p></td>
+<td><p>mf</p></td>
+<td><p>0.0</p></td>
+<td><p>0.0</p></td>
+<td><p>transcription regulatory region DNA binding</p></td>
+</tr>
+<tr class="row-odd"><td><p>gs-102</p></td>
+<td><p>1</p></td>
+<td><p>18</p></td>
+<td><p>ref</p></td>
+<td><p>pos</p></td>
+<td><p>mf</p></td>
+<td><p>0.0</p></td>
+<td><p>0.0</p></td>
+<td><p>sequence-specific DNA binding</p></td>
+</tr>
+<tr class="row-even"><td><p>gs-32</p></td>
+<td><p>1</p></td>
+<td><p>19</p></td>
+<td><p>ref</p></td>
+<td><p>pos</p></td>
+<td><p>mf</p></td>
+<td><p>0.0</p></td>
+<td><p>0.0</p></td>
+<td><p>sequence-specific DNA binding</p></td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="id1">
+<h4>Gene set figures<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+<a class="reference internal image-reference" href="_images/x-noiea-mf-gs-109.png"><img alt="_images/x-noiea-mf-gs-109.png" src="_images/x-noiea-mf-gs-109.png" style="width: 30%;" /></a>
+<a class="reference internal image-reference" href="_images/x-noiea-mf-gs-151.png"><img alt="_images/x-noiea-mf-gs-151.png" src="_images/x-noiea-mf-gs-151.png" style="width: 30%;" /></a>
+<a class="reference internal image-reference" href="_images/x-noiea-mf-gs-95.png"><img alt="_images/x-noiea-mf-gs-95.png" src="_images/x-noiea-mf-gs-95.png" style="width: 30%;" /></a>
+<a class="reference internal image-reference" href="_images/x-noiea-mf-gs-66.png"><img alt="_images/x-noiea-mf-gs-66.png" src="_images/x-noiea-mf-gs-66.png" style="width: 30%;" /></a>
+<a class="reference internal image-reference" href="_images/x-noiea-mf-gs-139.png"><img alt="_images/x-noiea-mf-gs-139.png" src="_images/x-noiea-mf-gs-139.png" style="width: 30%;" /></a>
+<a class="reference internal image-reference" href="_images/x-noiea-mf-gs-37.png"><img alt="_images/x-noiea-mf-gs-37.png" src="_images/x-noiea-mf-gs-37.png" style="width: 30%;" /></a>
+<a class="reference internal image-reference" href="_images/x-noiea-mf-gs-102.png"><img alt="_images/x-noiea-mf-gs-102.png" src="_images/x-noiea-mf-gs-102.png" style="width: 30%;" /></a>
+<a class="reference internal image-reference" href="_images/x-noiea-mf-gs-32.png"><img alt="_images/x-noiea-mf-gs-32.png" src="_images/x-noiea-mf-gs-32.png" style="width: 30%;" /></a>
+</div>
+</div>
+</div>
+<div class="section" id="xenopus-species-with-iea">
+<h2>Xenopus species with IEA<a class="headerlink" href="#xenopus-species-with-iea" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id2">
+<h3>Biologcal process<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 8%" />
+<col style="width: 7%" />
+<col style="width: 11%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 38%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>gene-set</p></th>
+<th class="head"><p>genes</p></th>
+<th class="head"><p>transcripts</p></th>
+<th class="head"><p>build</p></th>
+<th class="head"><p>dir.</p></th>
+<th class="head"><p>aspect</p></th>
+<th class="head"><p>p-value</p></th>
+<th class="head"><p>FDR</p></th>
+<th class="head"><p>top-terms</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>gs-45</p></td>
+<td><p>68</p></td>
+<td><p>473</p></td>
+<td><p>dn</p></td>
+<td><p>pos</p></td>
+<td><p>bp</p></td>
+<td><p>0.0</p></td>
+<td><p>0.0</p></td>
+<td><p>oxidation-reduction process</p></td>
+</tr>
+<tr class="row-odd"><td><p>gs-34</p></td>
+<td><p>26</p></td>
+<td><p>323</p></td>
+<td><p>ref</p></td>
+<td><p>neg</p></td>
+<td><p>bp</p></td>
+<td><p>0.0</p></td>
+<td><p>0.0</p></td>
+<td><p>proteolysis</p></td>
+</tr>
+<tr class="row-even"><td><p>gs-53</p></td>
+<td><p>101</p></td>
+<td><p>432</p></td>
+<td><p>ref</p></td>
+<td><p>pos</p></td>
+<td><p>bp</p></td>
+<td><p>0.0</p></td>
+<td><p>0.0</p></td>
+<td><p>metabolic process</p></td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="id3">
+<h4>Gene set figures<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
+<a class="reference internal image-reference" href="_images/x-iea-bp-gs-45.png"><img alt="_images/x-iea-bp-gs-45.png" src="_images/x-iea-bp-gs-45.png" style="width: 30%;" /></a>
+<a class="reference internal image-reference" href="_images/x-iea-bp-gs-34.png"><img alt="_images/x-iea-bp-gs-34.png" src="_images/x-iea-bp-gs-34.png" style="width: 30%;" /></a>
+<a class="reference internal image-reference" href="_images/x-iea-bp-gs-53.png"><img alt="_images/x-iea-bp-gs-53.png" src="_images/x-iea-bp-gs-53.png" style="width: 30%;" /></a>
+</div>
+</div>
+<div class="section" id="id4">
+<h3>Molecular function<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 8%" />
+<col style="width: 7%" />
+<col style="width: 11%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 38%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>gene-set</p></th>
+<th class="head"><p>genes</p></th>
+<th class="head"><p>transcripts</p></th>
+<th class="head"><p>build</p></th>
+<th class="head"><p>dir.</p></th>
+<th class="head"><p>aspect</p></th>
+<th class="head"><p>p-value</p></th>
+<th class="head"><p>FDR</p></th>
+<th class="head"><p>top-terms</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>gs-87</p></td>
+<td><p>4</p></td>
+<td><p>12</p></td>
+<td><p>gg</p></td>
+<td><p>neg</p></td>
+<td><p>mf</p></td>
+<td><p>0.0</p></td>
+<td><p>0.0</p></td>
+<td><p>transferase activity</p></td>
+</tr>
+<tr class="row-even"><td><p>gs-136</p></td>
+<td><p>6</p></td>
+<td><p>124</p></td>
+<td><p>ref</p></td>
+<td><p>neg</p></td>
+<td><p>mf</p></td>
+<td><p>0.0</p></td>
+<td><p>0.0</p></td>
+<td><p>nucleotide binding</p></td>
+</tr>
+<tr class="row-odd"><td><p>gs-146</p></td>
+<td><p>63</p></td>
+<td><p>129</p></td>
+<td><p>ref</p></td>
+<td><p>neg</p></td>
+<td><p>mf</p></td>
+<td><p>0.0</p></td>
+<td><p>0.0</p></td>
+<td><p>RNA binding</p></td>
+</tr>
+<tr class="row-even"><td><p>gs-29</p></td>
+<td><p>3</p></td>
+<td><p>121</p></td>
+<td><p>ref</p></td>
+<td><p>neg</p></td>
+<td><p>mf</p></td>
+<td><p>0.0</p></td>
+<td><p>0.0</p></td>
+<td><p>GTP binding</p></td>
+</tr>
+<tr class="row-odd"><td><p>gs-7</p></td>
+<td><p>10</p></td>
+<td><p>229</p></td>
+<td><p>ref</p></td>
+<td><p>neg</p></td>
+<td><p>mf</p></td>
+<td><p>0.0</p></td>
+<td><p>0.0</p></td>
+<td><p>protein binding</p></td>
+</tr>
+<tr class="row-even"><td><p>gs-3</p></td>
+<td><p>2</p></td>
+<td><p>32</p></td>
+<td><p>ref</p></td>
+<td><p>pos</p></td>
+<td><p>mf</p></td>
+<td><p>0.0</p></td>
+<td><p>0.0</p></td>
+<td><p>DNA binding</p></td>
+</tr>
+<tr class="row-odd"><td><p>gs-5</p></td>
+<td><p>14</p></td>
+<td><p>87</p></td>
+<td><p>ref</p></td>
+<td><p>pos</p></td>
+<td><p>mf</p></td>
+<td><p>0.0</p></td>
+<td><p>0.0</p></td>
+<td><p>transporter activity</p></td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="id5">
+<h4>Gene set figures<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h4>
+<a class="reference internal image-reference" href="_images/x-iea-mf-gs-87.png"><img alt="_images/x-iea-mf-gs-87.png" src="_images/x-iea-mf-gs-87.png" style="width: 30%;" /></a>
+<a class="reference internal image-reference" href="_images/x-iea-mf-gs-136.png"><img alt="_images/x-iea-mf-gs-136.png" src="_images/x-iea-mf-gs-136.png" style="width: 30%;" /></a>
+<a class="reference internal image-reference" href="_images/x-iea-mf-gs-146.png"><img alt="_images/x-iea-mf-gs-146.png" src="_images/x-iea-mf-gs-146.png" style="width: 30%;" /></a>
+<a class="reference internal image-reference" href="_images/x-iea-mf-gs-29.png"><img alt="_images/x-iea-mf-gs-29.png" src="_images/x-iea-mf-gs-29.png" style="width: 30%;" /></a>
+<a class="reference internal image-reference" href="_images/x-iea-mf-gs-7.png"><img alt="_images/x-iea-mf-gs-7.png" src="_images/x-iea-mf-gs-7.png" style="width: 30%;" /></a>
+<a class="reference internal image-reference" href="_images/x-iea-mf-gs-3.png"><img alt="_images/x-iea-mf-gs-3.png" src="_images/x-iea-mf-gs-3.png" style="width: 30%;" /></a>
+<a class="reference internal image-reference" href="_images/x-iea-mf-gs-5.png"><img alt="_images/x-iea-mf-gs-5.png" src="_images/x-iea-mf-gs-5.png" style="width: 30%;" /></a>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="references.html" class="btn btn-neutral float-right" title="Works cited" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="de-novo/de-novo-difexp.html" class="btn btn-neutral float-left" title="Differential expression analysis" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, AJ Richards et al.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
