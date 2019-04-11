@@ -1,0 +1,15 @@
+(1) get the reference genome
+    
+    wget ftp://ftp.xenbase.org/pub/Genomics/Tropicalis_Scaffolds/7.1/xenopus_tropicalis_v7.1.tar.gz
+
+(1) basic qc on the reads
+
+    python preprocessReads.py
+
+(2) run trinity in genome guided [gg] or de-novo mode [dn]
+
+    python runTrinity.py -m [gg|dn]
+
+(3) Align the samples and get counts
+
+    calculate-coverage-trinity.py
