@@ -1,0 +1,323 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Assembly &mdash; xenopus-supplement 1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Differential expression analysis" href="ref-difexp.html" />
+    <link rel="prev" title="Preparation of the reference genome" href="reference-prep.html" />
+    <link href="../_static/style.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> xenopus-supplement
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../de-novo/de-novo.html">Trinity de novo assembly</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genome-guided/genome-guided.html">Trinity genome-guided assembly</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="reference.html">STAR reference assembly</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="reference.html#gene-set-generation">Gene set generation</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="reference-prep.html">Preparation of the reference genome</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Assembly</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#preparing-the-reference-genome">Preparing the reference genome</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#all-of-swissprot">All of SwissProt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#xenopus-restricted-swissprot">Xenopus restricted SwissProt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#blast-against-xenopus-amino-acid-sequences">BLAST against Xenopus amino acid sequences</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ref-difexp.html">Differential expression analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../geneset-analysis.html">Gene set analysis</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../filtered-analysis.html">Filtered differential expression analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../geneset-analysis.html">Gene set analysis</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../qc/qc.html">Quality control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../methods/database.html">Database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gs/gene-sets.html">Functional gene sets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../results/meta-data.html">Meta-analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">Works cited</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">xenopus-supplement</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="reference.html">Cufflinks assembly of transcripts</a> &raquo;</li>
+        
+      <li>Assembly</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/reference/star-assembly.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="assembly">
+<h1>Assembly<a class="headerlink" href="#assembly" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>llumina HiSeq 2500, CASAVA 1.8.2, RTA 1.13, Run ID: 130530_SN982_0225_AC20RLACXX</p>
+</div>
+<p>A Python script was used to unzip, concatenate and trim the original reads via system calls (<a class="reference external" href="https://docs.python.org/2/library/subprocess.html">subprocess</a>).  We used <a class="reference external" href="http://www.usadellab.org/cms/?page=trimmomatic">Trimmomatic</a> <a class="reference internal" href="../references.html#bolger14" id="id1"><span>[Bolger14]</span></a> to trim reads based on quality with default settings (LEADING:5 TRAILING:5 MINLEN:36).</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference download internal" download="" href="../_downloads/7ce614c373997e925f665571725d6e50/preprocessReads.py"><code class="xref download docutils literal notranslate"><span class="pre">preprocessReads.py</span></code></a></p></li>
+</ul>
+</div></blockquote>
+<p>There are four output files.  Two are for the <em>paired</em> output where both reads passed, and two are for corresponding <em>unpaired</em> output where only one read passed (see manual).</p>
+<div class="section" id="preparing-the-reference-genome">
+<h2>Preparing the reference genome<a class="headerlink" href="#preparing-the-reference-genome" title="Permalink to this headline">¶</a></h2>
+<p>See the section describing <a class="reference internal" href="reference-prep.html"><span class="doc">the preparation of the reference genome</span></a>.</p>
+<div class="section" id="blast-genome-against-swissprot">
+<h3>BLAST genome against SwissProt<a class="headerlink" href="#blast-genome-against-swissprot" title="Permalink to this headline">¶</a></h3>
+<p>First, we obtain the known protein sequences.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>~$ wget ftp://ftp.xenbase.org/pub/Genomics/JGI/Xentr7.1/Xentr7_2_Stable_Protein.fa.gz
+~$ wget ftp://ftp.xenbase.org/pub/Genomics/JGI/Xentr7.1/Xentr7_2_Stable_Transcript.fa.gz
+~$ gunzip -c Xentr7_2_Stable_Protein.fa.gz &gt; Xentr7_2_Stable_Protein.fa
+~$ gunzip -c Xentr7_2_Stable_Transcript.fa.gz &gt; Xentr7_2_Stable_Transcript.fa
+</pre></div>
+</div>
+<p>Next, we BLAST the transcript against SwissProt (<cite>-c</cite> can be used to initiate cluster mode)</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference download internal" download="" href="../_downloads/aba7dae162c0c9e00b3b311ad3837e79/runBlast.py"><code class="xref download docutils literal notranslate"><span class="pre">runBlast.py</span></code></a></p></li>
+</ul>
+</div></blockquote>
+<p>Then, the data are parsed with one of the two following.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference download internal" download="" href="../_downloads/db9a3c0d30ed774fd3aee6fce28839df/runBlastParallelParse.py"><code class="xref download docutils literal notranslate"><span class="pre">runBlastParallelParse.py</span></code></a></p></li>
+<li><p><a class="reference download internal" download="" href="../_downloads/71aa5629b2560d093cb39aba244a6586/runBlastSummarize.py"><code class="xref download docutils literal notranslate"><span class="pre">runBlastSummarize.py</span></code></a></p></li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="all-of-swissprot">
+<h2>All of SwissProt<a class="headerlink" href="#all-of-swissprot" title="Permalink to this headline">¶</a></h2>
+<p>The best hit by transcript.</p>
+<blockquote>
+<div><div class="align-center figure">
+<a class="reference internal image-reference" href="../_images/ref-trinity-blast-pie-isoforms.png"><img alt="ref trinity blast taxa by isoform" src="../_images/ref-trinity-blast-pie-isoforms.png" style="width: 630.0px; height: 489.99999999999994px;" /></a>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>SwissProt
+transcripts: 38683
+genes: 17535
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="xenopus-restricted-swissprot">
+<h2>Xenopus restricted SwissProt<a class="headerlink" href="#xenopus-restricted-swissprot" title="Permalink to this headline">¶</a></h2>
+<p>The best hits only considering <em>Xenopus sp.</em></p>
+<blockquote>
+<div><div class="align-center figure">
+<a class="reference internal image-reference" href="../_images/ref-trinity-blast-pie-frog.png"><img alt="ref trinity blast taxa by gene" src="../_images/ref-trinity-blast-pie-frog.png" style="width: 630.0px; height: 489.99999999999994px;" /></a>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>SwissProt [8355,8364]
+transcripts: 20638
+genes: 3750
+</pre></div>
+</div>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Genes correspond to unique gene identifiers, but the number includes orthalogs</p>
+</div>
+</div>
+<div class="section" id="blast-against-xenopus-amino-acid-sequences">
+<h2>BLAST against Xenopus amino acid sequences<a class="headerlink" href="#blast-against-xenopus-amino-acid-sequences" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>~$ wget ftp://ftp.ncbi.nlm.nih.gov/genomes/Xenopus_Silurana_tropicalis/protein/protein.fa.gz
+~$ gunzip -c protein.fa.gz &gt; xtropicalis.fasta
+~$ makeblastdb -in xtropicalis.fasta -dbtype &#39;prot&#39; -out xtropicalis
+~$ less xtropicalis.fasta | grep gi &gt; foo.txt &amp;&amp; wc -l foo.txt
+</pre></div>
+</div>
+</div></blockquote>
+<p>There were 28495 amino acid sequences in the fasta file.</p>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>X. tropicalis
+transcripts: 41299
+genes: 20735
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="ref-difexp.html" class="btn btn-neutral float-right" title="Differential expression analysis" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="reference-prep.html" class="btn btn-neutral float-left" title="Preparation of the reference genome" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, AJ Richards et al.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

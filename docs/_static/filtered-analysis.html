@@ -1,0 +1,688 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Differential expression on filtered transcripts &mdash; xenopus-supplement 1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Quality control" href="qc/qc.html" />
+    <link rel="prev" title="Differential expression analysis" href="reference/ref-difexp.html" />
+    <link href="_static/style.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> xenopus-supplement
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="de-novo/de-novo.html">Trinity de novo assembly</a></li>
+<li class="toctree-l1"><a class="reference internal" href="genome-guided/genome-guided.html">Trinity genome-guided assembly</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reference/reference.html">STAR reference assembly</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Filtered differential expression analysis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#adjusted-p-value-threshold-0-5">Adjusted p-value threshold = 0.5</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#comparison-summaries">Comparison summaries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#individual-genes">Individual genes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gene-ontology">Gene Ontology</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#adjusted-p-value-threshold-0-8">Adjusted p-value threshold = 0.8</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="geneset-analysis.html">Gene set analysis</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="qc/qc.html">Quality control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="methods/database.html">Database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gs/gene-sets.html">Functional gene sets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="results/meta-data.html">Meta-analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">Works cited</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">xenopus-supplement</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Differential expression on filtered transcripts</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/filtered-analysis.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="differential-expression-on-filtered-transcripts">
+<h1>Differential expression on filtered transcripts<a class="headerlink" href="#differential-expression-on-filtered-transcripts" title="Permalink to this headline">¶</a></h1>
+<p>Here we identify the genes with the most pronounced differential expression. We use the three assemblies to help filter the candidate genes then perform a functional investigation.</p>
+<div class="section" id="adjusted-p-value-threshold-0-5">
+<h2>Adjusted p-value threshold = 0.5<a class="headerlink" href="#adjusted-p-value-threshold-0-5" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><table class="docutils align-center">
+<colgroup>
+<col style="width: 32%" />
+<col style="width: 23%" />
+<col style="width: 23%" />
+<col style="width: 23%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Assembly</p></td>
+<td><p>transcripts</p></td>
+<td><p>non-outlier</p></td>
+<td><p>passed</p></td>
+</tr>
+<tr class="row-even"><td><p><em>de novo</em></p></td>
+<td><p>2,592,841</p></td>
+<td><p>103,481</p></td>
+<td><p><strong>852</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>genome guided</p></td>
+<td><p>52,543</p></td>
+<td><p>29,904</p></td>
+<td><p><strong>106</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>reference</p></td>
+<td><p>28,170</p></td>
+<td><p>5,439</p></td>
+<td><p><strong>47</strong></p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<div class="section" id="comparison-summaries">
+<h3>Comparison summaries<a class="headerlink" href="#comparison-summaries" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><ul>
+<li><dl class="simple">
+<dt>In at least 2 assemblies 42</dt><dd><ul class="simple">
+<li><p>8364-bp - 9/42</p></li>
+<li><p>8364-mf - 16/42</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><em>D. rerio</em></dt><dd><ul class="simple">
+<li><p>7955-bp - 6/23</p></li>
+<li><p>7955-mf - 12/23</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p><em>H. sapiens</em></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>9606-bp - 35/42</p></li>
+<li><p>9606-mf - 37/42</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<div class="align-center figure">
+<a class="reference internal image-reference" href="_images/venn-05.png"><img alt="venn diagram for assemblies 0.5" src="_images/venn-05.png" style="width: 716.0px; height: 502.6px;" /></a>
+</div>
+</div></blockquote>
+<div class="section" id="individual-genes">
+<h4>Individual genes<a class="headerlink" href="#individual-genes" title="Permalink to this headline">¶</a></h4>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 61%" />
+<col style="width: 23%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>symbol</p></th>
+<th class="head"><p>comments</p></th>
+<th class="head"><p>p-values(‘dn’;’gg’;’ref’)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="http://www.ncbi.nlm.nih.gov/gene/?term=100492948">nudt15</a></p></td>
+<td><p>nudix (nucleoside diphosphate linked moiety X)-type motif 15</p></td>
+<td><p>0.0375;0.0061;None</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="http://www.ncbi.nlm.nih.gov/gene/?term=448565">acsl1</a></p></td>
+<td><p>acyl-CoA synthetase long-chain family member 1 protein</p></td>
+<td><p>0.0779;None;0.4736</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="http://www.ncbi.nlm.nih.gov/gene/?term=394825">pfkp</a></p></td>
+<td><p>phosphofructokinase, platelet</p></td>
+<td><p>0.0381;0.186;None</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="http://www.ncbi.nlm.nih.gov/gene/?term=100101671">sds</a></p></td>
+<td><p>serine dehydratase</p></td>
+<td><p>0.4706;0.4478;None</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="http://www.ncbi.nlm.nih.gov/gene/?term=780324">pde4b</a></p></td>
+<td><p>phosphodiesterase 4B, cAMP-specific</p></td>
+<td><p>0.0335;0.001;0.1237</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="http://www.ncbi.nlm.nih.gov/gene/?term=100145766">lct.2</a></p></td>
+<td><p>lactase, gene 2</p></td>
+<td><p>0.2238;0.4581;None</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="http://www.ncbi.nlm.nih.gov/gene/?term=100125042">add2</a></p></td>
+<td><p>adducin 2 (beta)</p></td>
+<td><p>None;0.3441;0.4886</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="http://www.ncbi.nlm.nih.gov/gene/?term=548592">atp1b1</a></p></td>
+<td><p>ATPase, Na+/K+ transporting, beta 1 polypeptide</p></td>
+<td><p>None;0.4581;0.4886</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="http://www.ncbi.nlm.nih.gov/gene/?term=395003">dgat2</a></p></td>
+<td><p>diacylglycerol O-acyltransferase 2</p></td>
+<td><p>0.3365;0.0726;0.0095</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="http://www.ncbi.nlm.nih.gov/gene/?term=101733361">LOC101733361</a></p></td>
+<td><p>E3 ubiquitin-protein ligase TRIM39-like</p></td>
+<td><p>0.0697;0.0146;None</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="http://www.ncbi.nlm.nih.gov/gene/?term=394842">sucla2</a></p></td>
+<td><p>succinate-CoA ligase, ADP-forming, beta subunit</p></td>
+<td><p>None;0.4478;0.3676</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="http://www.ncbi.nlm.nih.gov/gene/?term=100127846">macf1</a></p></td>
+<td><p>microtubule-actin crosslinking factor 1</p></td>
+<td><p>0.4727;0.0358;None</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="http://www.ncbi.nlm.nih.gov/gene/?term=594944">slc38a3</a></p></td>
+<td><p>solute carrier family 38, member 3</p></td>
+<td><p>0.0348;0.0492;None</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="http://www.ncbi.nlm.nih.gov/gene/?term=100127718">prdx5</a></p></td>
+<td><p>peroxiredoxin 5</p></td>
+<td><p>0.1418;0.0726;0.0095</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="http://www.ncbi.nlm.nih.gov/gene/?term=100127862">lpl</a></p></td>
+<td><p>lipoprotein lipase</p></td>
+<td><p>0.2805;0.3289;0.4737</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="http://www.ncbi.nlm.nih.gov/gene/?term=549215">c14orf159</a></p></td>
+<td><p>chromosome 14 open reading frame 159</p></td>
+<td><p>0.2855;0.3941;0.3267</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="http://www.ncbi.nlm.nih.gov/gene/?term=394747">hadhb</a></p></td>
+<td><p>hydroxyacyl-CoA dehydrogenase/3-ketoacyl-CoA thiolase/enoyl-CoA hydratase (t…</p></td>
+<td><p>0.1443;0.017;0.2587</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="http://www.ncbi.nlm.nih.gov/gene/?term=100127868">sod3</a></p></td>
+<td><p>superoxide dismutase 3, extracellular</p></td>
+<td><p>0.3725;None;0.4886</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="http://www.ncbi.nlm.nih.gov/gene/?term=779461">zw10</a></p></td>
+<td><p>zw10 kinetochore protein</p></td>
+<td><p>0.3074;0.4581;None</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="http://www.ncbi.nlm.nih.gov/gene/?term=550020">cpn1</a></p></td>
+<td><p>carboxypeptidase N, polypeptide 1</p></td>
+<td><p>0.2415;0.1466;None</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="http://www.ncbi.nlm.nih.gov/gene/?term=100216156">abca5</a></p></td>
+<td><p>ATP-binding cassette, sub-family A (ABC1), member 5</p></td>
+<td><p>0.1755;0.203;None</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="http://www.ncbi.nlm.nih.gov/gene/?term=100496984">wdr65</a></p></td>
+<td><p>WD repeat domain 65</p></td>
+<td><p>0.4045;0.0457;0.06</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="http://www.ncbi.nlm.nih.gov/gene/?term=549140">btrc</a></p></td>
+<td><p>beta-transducin repeat containing E3 ubiquitin protein ligase</p></td>
+<td><p>0.0068;0.0;None</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="http://www.ncbi.nlm.nih.gov/gene/?term=100497378">rrp9</a></p></td>
+<td><p>ribosomal RNA processing 9, small subunit (SSU) processome component, homolo…</p></td>
+<td><p>0.4989;0.2902;None</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="http://www.ncbi.nlm.nih.gov/gene/?term=448762">myh3</a></p></td>
+<td><p>myosin, heavy chain 3, skeletal muscle, embryonic</p></td>
+<td><p>0.0178;None;0.4886</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="http://www.ncbi.nlm.nih.gov/gene/?term=100487011">LOC100487011</a></p></td>
+<td><p>NXPE family member 2-like</p></td>
+<td><p>0.0701;None;0.0277</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="http://www.ncbi.nlm.nih.gov/gene/?term=100487160">nrap</a></p></td>
+<td><p>nebulin-related anchoring protein</p></td>
+<td><p>0.176;0.3235;None</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="http://www.ncbi.nlm.nih.gov/gene/?term=100495647">bdh1</a></p></td>
+<td><p>3-hydroxybutyrate dehydrogenase, type 1</p></td>
+<td><p>0.2261;0.186;0.3979</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="http://www.ncbi.nlm.nih.gov/gene/?term=496550">pvalb</a></p></td>
+<td><p>parvalbumin</p></td>
+<td><p>0.0006;None;0.0095</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="http://www.ncbi.nlm.nih.gov/gene/?term=100038285">gk</a></p></td>
+<td><p>glycerol kinase</p></td>
+<td><p>0.309;None;0.2587</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="http://www.ncbi.nlm.nih.gov/gene/?term=100491666">neb</a></p></td>
+<td><p>nebulin</p></td>
+<td><p>0.176;0.0358;None</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="http://www.ncbi.nlm.nih.gov/gene/?term=100487880">mybpc1</a></p></td>
+<td><p>myosin binding protein C, slow type</p></td>
+<td><p>0.4897;0.4581;None</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="http://www.ncbi.nlm.nih.gov/gene/?term=100490673">LOC100490673</a></p></td>
+<td><p>acetylcholinesterase-like</p></td>
+<td><p>0.0982;0.4478;None</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="http://www.ncbi.nlm.nih.gov/gene/?term=100158572">nnt</a></p></td>
+<td><p>nicotinamide nucleotide transhydrogenase</p></td>
+<td><p>0.2592;None;0.3676</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="http://www.ncbi.nlm.nih.gov/gene/?term=394673">act3</a></p></td>
+<td><p>actin, alpha sarcomeric/skeletal</p></td>
+<td><p>0.2291;None;0.484</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="http://www.ncbi.nlm.nih.gov/gene/?term=595048">mccc2</a></p></td>
+<td><p>methylcrotonoyl-CoA carboxylase 2 (beta)</p></td>
+<td><p>None;0.186;0.2587</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="http://www.ncbi.nlm.nih.gov/gene/?term=496756">sdsl</a></p></td>
+<td><p>serine dehydratase-like</p></td>
+<td><p>0.0847;0.2902;None</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="http://www.ncbi.nlm.nih.gov/gene/?term=448406">dazap1</a></p></td>
+<td><p>DAZ associated protein 1</p></td>
+<td><p>0.0;0.0001;None</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="http://www.ncbi.nlm.nih.gov/gene/?term=493462">ltb4dh</a></p></td>
+<td><p>ltb4dh protein</p></td>
+<td><p>0.247;0.3318;None</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="http://www.ncbi.nlm.nih.gov/gene/?term=100125790">rufy1</a></p></td>
+<td><p>RUN and FYVE domain containing 1</p></td>
+<td><p>0.2291;0.0146;None</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="http://www.ncbi.nlm.nih.gov/gene/?term=100127580">cpe</a></p></td>
+<td><p>carboxypeptidase E</p></td>
+<td><p>0.067;0.0204;0.3538</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="http://www.ncbi.nlm.nih.gov/gene/?term=779997">fam110d</a></p></td>
+<td><p>family with sequence similarity 110, member D</p></td>
+<td><p>0.4548;None;0.4729</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="gene-ontology">
+<h4>Gene Ontology<a class="headerlink" href="#gene-ontology" title="Permalink to this headline">¶</a></h4>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 4%" />
+<col style="width: 5%" />
+<col style="width: 28%" />
+<col style="width: 64%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Rank</p></th>
+<th class="head"><p>Annots</p></th>
+<th class="head"><p>GO</p></th>
+<th class="head"><p>Genes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>16</p></td>
+<td><p>protein binding</p></td>
+<td><p>RUFY1,GK,NEB,SOD3,BTRC,LOC101733361,LOC100490673,HADHB,ACT3,ZW10,SUCLA2,MCCC2,MACF1,MYBPC1,ATP1B1,LPL</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>14</p></td>
+<td><p>small molecule metabolic process</p></td>
+<td><p>BDH1,GK,LCT.2,DGAT2,NUDT15,NNT,HADHB,LOC100490673,PFKP,ACSL1,LPL,SUCLA2,MCCC2,LTB4DH</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>10</p></td>
+<td><p>metal ion binding</p></td>
+<td><p>RUFY1,SOD3,NUDT15,LOC101733361,PDE4B,PFKP,CPE,SUCLA2,PVALB,CPN1</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>8</p></td>
+<td><p>ATP binding</p></td>
+<td><p>ABCA5,GK,ACT3,MYH3,PFKP,ACSL1,SUCLA2,MCCC2</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>8</p></td>
+<td><p>metabolic process</p></td>
+<td><p>BDH1,MACF1,LCT.2,ABCA5,MYH3,PFKP,CPE,SUCLA2</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>7</p></td>
+<td><p>zinc ion binding</p></td>
+<td><p>RUFY1,SOD3,NRAP,LOC101733361,CPE,LTB4DH,CPN1</p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p>6</p></td>
+<td><p>hydrolase activity</p></td>
+<td><p>LCT.2,NUDT15,LOC100490673,CPE,LPL,CPN1</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>5</p></td>
+<td><p>oxidation-reduction process</p></td>
+<td><p>BDH1,NNT,PRDX5,SOD3,LTB4DH</p></td>
+</tr>
+<tr class="row-even"><td><p>9</p></td>
+<td><p>5</p></td>
+<td><p>protein homodimerization activity</p></td>
+<td><p>DGAT2,ADD2,SDS,PVALB,LOC100490673</p></td>
+</tr>
+<tr class="row-odd"><td><p>10</p></td>
+<td><p>5</p></td>
+<td><p>actin binding</p></td>
+<td><p>NRAP,MYBPC1,ADD2,MACF1,NEB</p></td>
+</tr>
+<tr class="row-even"><td><p>11</p></td>
+<td><p>5</p></td>
+<td><p>nucleotide binding</p></td>
+<td><p>MCCC2,ABCA5,PFKP,DAZAP1,ACT3</p></td>
+</tr>
+<tr class="row-odd"><td><p>12</p></td>
+<td><p>5</p></td>
+<td><p>oxidoreductase activity</p></td>
+<td><p>BDH1,NNT,PRDX5,SOD3,LTB4DH</p></td>
+</tr>
+<tr class="row-even"><td><p>13</p></td>
+<td><p>5</p></td>
+<td><p>cellular lipid metabolic process</p></td>
+<td><p>BDH1,GK,ACSL1,DGAT2,HADHB</p></td>
+</tr>
+<tr class="row-odd"><td><p>14</p></td>
+<td><p>5</p></td>
+<td><p>catalytic activity</p></td>
+<td><p>BDH1,PFKP,LCT.2,HADHB,SUCLA2</p></td>
+</tr>
+<tr class="row-even"><td><p>15</p></td>
+<td><p>4</p></td>
+<td><p>transferase activity</p></td>
+<td><p>GK,HADHB,DGAT2,PFKP</p></td>
+</tr>
+<tr class="row-odd"><td><p>16</p></td>
+<td><p>4</p></td>
+<td><p>phospholipid metabolic process</p></td>
+<td><p>DGAT2,LPL,HADHB,LOC100490673</p></td>
+</tr>
+<tr class="row-even"><td><p>17</p></td>
+<td><p>4</p></td>
+<td><p>transport</p></td>
+<td><p>ABCA5,ZW10,ATP1B1,SLC38A3</p></td>
+</tr>
+<tr class="row-odd"><td><p>18</p></td>
+<td><p>4</p></td>
+<td><p>muscle filament sliding</p></td>
+<td><p>MYH3,MYBPC1,NEB,ACT3</p></td>
+</tr>
+<tr class="row-even"><td><p>19</p></td>
+<td><p>4</p></td>
+<td><p>poly(A) RNA binding</p></td>
+<td><p>DAZAP1,MACF1,RRP9,HADHB</p></td>
+</tr>
+<tr class="row-odd"><td><p>20</p></td>
+<td><p>4</p></td>
+<td><p>triglyceride biosynthetic process</p></td>
+<td><p>GK,ACSL1,DGAT2,LPL</p></td>
+</tr>
+<tr class="row-even"><td><p>21</p></td>
+<td><p>3</p></td>
+<td><p>carbohydrate metabolic process</p></td>
+<td><p>GK,PFKP,LCT.2</p></td>
+</tr>
+<tr class="row-odd"><td><p>22</p></td>
+<td><p>3</p></td>
+<td><p>actin filament binding</p></td>
+<td><p>MACF1,ADD2,MYH3</p></td>
+</tr>
+<tr class="row-even"><td><p>23</p></td>
+<td><p>3</p></td>
+<td><p>ligase activity</p></td>
+<td><p>MCCC2,LOC101733361,BTRC</p></td>
+</tr>
+<tr class="row-odd"><td><p>24</p></td>
+<td><p>3</p></td>
+<td><p>glycerophospholipid biosynthetic process</p></td>
+<td><p>DGAT2,LOC100490673,HADHB</p></td>
+</tr>
+<tr class="row-even"><td><p>25</p></td>
+<td><p>3</p></td>
+<td><p>cell adhesion</p></td>
+<td><p>MYBPC1,LOC100490673,ATP1B1</p></td>
+</tr>
+<tr class="row-odd"><td><p>26</p></td>
+<td><p>3</p></td>
+<td><p>muscle organ development</p></td>
+<td><p>MYH3,NEB,LOC100490673</p></td>
+</tr>
+<tr class="row-even"><td><p>27</p></td>
+<td><p>3</p></td>
+<td><p>Wnt signaling pathway</p></td>
+<td><p>BTRC,MACF1,CPE</p></td>
+</tr>
+<tr class="row-odd"><td><p>28</p></td>
+<td><p>3</p></td>
+<td><p>response to drug</p></td>
+<td><p>BDH1,ACSL1,LPL</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="section" id="adjusted-p-value-threshold-0-8">
+<h2>Adjusted p-value threshold = 0.8<a class="headerlink" href="#adjusted-p-value-threshold-0-8" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><table class="docutils align-center">
+<colgroup>
+<col style="width: 32%" />
+<col style="width: 23%" />
+<col style="width: 23%" />
+<col style="width: 23%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Assembly</p></td>
+<td><p>transcripts</p></td>
+<td><p>non-outlier</p></td>
+<td><p>passed</p></td>
+</tr>
+<tr class="row-even"><td><p><em>de novo</em></p></td>
+<td><p>2,592,841</p></td>
+<td><p>94,216</p></td>
+<td><p><strong>1596</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>genome guided</p></td>
+<td><p>52,543</p></td>
+<td><p>29,904</p></td>
+<td><p><strong>218</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>reference</p></td>
+<td><p>28,170</p></td>
+<td><p>5,439</p></td>
+<td><p><strong>293</strong></p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<ul>
+<li><p>In at least two assemblies: 145</p>
+<blockquote>
+<div><div class="align-center figure">
+<a class="reference internal image-reference" href="_images/venn-08.png"><img alt="venn diagram for assemblies 0.8" src="_images/venn-08.png" style="width: 698.4000000000001px; height: 522.6px;" /></a>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="qc/qc.html" class="btn btn-neutral float-right" title="Quality control" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="reference/ref-difexp.html" class="btn btn-neutral float-left" title="Differential expression analysis" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, AJ Richards et al.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,622 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Differential expression analysis &mdash; xenopus-supplement 1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Differential expression on filtered transcripts" href="../filtered-analysis.html" />
+    <link rel="prev" title="Assembly" href="star-assembly.html" />
+    <link href="../_static/style.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> xenopus-supplement
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../de-novo/de-novo.html">Trinity de novo assembly</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genome-guided/genome-guided.html">Trinity genome-guided assembly</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="reference.html">STAR reference assembly</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="reference.html#gene-set-generation">Gene set generation</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="reference-prep.html">Preparation of the reference genome</a></li>
+<li class="toctree-l3"><a class="reference internal" href="star-assembly.html">Assembly</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Differential expression analysis</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#create-raw-and-normalized-count-matrices">Create raw and normalized count matrices</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#run-edger-and-deseq">Run edgeR and DESeq</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#endurant-vs-non-endurant-summary">Endurant vs non-endurant summary</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#links">Links</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../geneset-analysis.html">Gene set analysis</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../filtered-analysis.html">Filtered differential expression analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../geneset-analysis.html">Gene set analysis</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../qc/qc.html">Quality control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../methods/database.html">Database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gs/gene-sets.html">Functional gene sets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../results/meta-data.html">Meta-analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">Works cited</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">xenopus-supplement</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="reference.html">Cufflinks assembly of transcripts</a> &raquo;</li>
+        
+      <li>Differential expression analysis</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/reference/ref-difexp.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="differential-expression-analysis">
+<h1>Differential expression analysis<a class="headerlink" href="#differential-expression-analysis" title="Permalink to this headline">¶</a></h1>
+<p>These results are specific to the <a class="reference internal" href="star-assembly.html"><span class="doc">reference assembly</span></a>.</p>
+<div class="section" id="create-raw-and-normalized-count-matrices">
+<h2>Create raw and normalized count matrices<a class="headerlink" href="#create-raw-and-normalized-count-matrices" title="Permalink to this headline">¶</a></h2>
+<p>The software HTSeq was used to estimate read abundances <a class="reference internal" href="../references.html#anders14" id="id1"><span>[Anders14]</span></a>.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference download internal" download="" href="../_downloads/0687b1344ff5f2241e18374b614b3205/getCountMatrixReference.py"><code class="xref download docutils literal notranslate"><span class="pre">getCountMatrixReference.py</span></code></a></p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="run-edger-and-deseq">
+<h2>Run edgeR and DESeq<a class="headerlink" href="#run-edger-and-deseq" title="Permalink to this headline">¶</a></h2>
+<p>DESeq2 was run on the assembly for the gene count matrices <a class="reference internal" href="../references.html#love14" id="id2"><span>[Love14]</span></a>.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference download internal" download="" href="../_downloads/c83c4393b6d73cece2ae9baf7e5a3898/runDeAnalysis.py"><code class="xref download docutils literal notranslate"><span class="pre">runDeAnalysis.py</span></code></a></p></li>
+<li><p><a class="reference download internal" download="" href="../_downloads/dc9cde122a9c41dcb477d0038c8be626/runDESeq.R"><code class="xref download docutils literal notranslate"><span class="pre">runDESeq.R</span></code></a></p></li>
+</ul>
+</div></blockquote>
+<p>Then the resulting *.csv files were summarized using</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference download internal" download="" href="../_downloads/aa802cbbd330e9e997bf8c172ed2cf11/summarizeResultsDE.py"><code class="xref download docutils literal notranslate"><span class="pre">summarizeResultsDE.py</span></code></a></p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="endurant-vs-non-endurant-summary">
+<h2>Endurant vs non-endurant summary<a class="headerlink" href="#endurant-vs-non-endurant-summary" title="Permalink to this headline">¶</a></h2>
+<div class="align-center figure">
+<a class="reference internal image-reference" href="../_images/heatmap-ref.png"><img alt="top 75 transcripts" src="../_images/heatmap-ref.png" style="width: 900.0px; height: 1050.0px;" /></a>
+</div>
+<div class="section" id="gene-level-analyses">
+<h3>Gene level analyses<a class="headerlink" href="#gene-level-analyses" title="Permalink to this headline">¶</a></h3>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 13%" />
+<col style="width: 15%" />
+<col style="width: 29%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>transcript ID</p></th>
+<th class="head"><p>hitId</p></th>
+<th class="head"><p>gene-symbol</p></th>
+<th class="head"><p>species</p></th>
+<th class="head"><p>e-value</p></th>
+<th class="head"><p>DESeq-pval</p></th>
+<th class="head"><p>DESeq-adj-pval</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Xetro.B02299.1</p></td>
+<td><p><a class="reference external" href="http://www.uniprot.org/uniprot/DGAT2_XENTR">DGAT2_XENTR</a></p></td>
+<td><p>dgat2</p></td>
+<td><p>Xenopus  tropicalis</p></td>
+<td><p>0.0</p></td>
+<td><p>5.4e-06</p></td>
+<td><p>0.0121204</p></td>
+</tr>
+<tr class="row-odd"><td><p>Xetro.D01039.1</p></td>
+<td><p><a class="reference external" href="http://www.uniprot.org/uniprot/A8WGX9_XENTR">A8WGX9_XENTR</a></p></td>
+<td><p>prdx5</p></td>
+<td><p>Xenopus  tropicalis</p></td>
+<td><p>0.0</p></td>
+<td><p>3.8e-06</p></td>
+<td><p>0.0121204</p></td>
+</tr>
+<tr class="row-even"><td><p>Xetro.I01289.1</p></td>
+<td><p><a class="reference external" href="http://www.uniprot.org/uniprot/Q5XH89_XENTR">Q5XH89_XENTR</a></p></td>
+<td><p>pvalb</p></td>
+<td><p>Xenopus  tropicalis</p></td>
+<td><p>0.0</p></td>
+<td><p>3.3e-06</p></td>
+<td><p>0.0121204</p></td>
+</tr>
+<tr class="row-odd"><td><p>Xetro.G01623.1</p></td>
+<td><p><a class="reference external" href="http://www.uniprot.org/uniprot/B2GUS1_XENTR">B2GUS1_XENTR</a></p></td>
+<td><p>gpr153</p></td>
+<td><p>Xenopus  tropicalis</p></td>
+<td><p>0.0</p></td>
+<td><p>1.23e-05</p></td>
+<td><p>0.0209534</p></td>
+</tr>
+<tr class="row-even"><td><p>Xetro.G01199.3</p></td>
+<td><p><a class="reference external" href="http://www.ncbi.nlm.nih.gov/gene/?term=XP_002940498.2">XP_002940498.2</a></p></td>
+<td><p>LOC100487011</p></td>
+<td><p>Xenopus  tropicalis</p></td>
+<td><p>0.0</p></td>
+<td><p>2.18e-05</p></td>
+<td><p>0.0296653</p></td>
+</tr>
+<tr class="row-odd"><td><p>Xetro.A01004.1</p></td>
+<td><p><a class="reference external" href="http://www.uniprot.org/uniprot/Q5M8H3_XENTR">Q5M8H3_XENTR</a></p></td>
+<td><p>sdsl</p></td>
+<td><p>Xenopus  tropicalis</p></td>
+<td><p>0.0</p></td>
+<td><p>7.4e-05</p></td>
+<td><p>0.0703141</p></td>
+</tr>
+<tr class="row-even"><td><p>Xetro.D01858.1</p></td>
+<td><p><a class="reference external" href="http://www.ncbi.nlm.nih.gov/gene/?term=XP_002931652.2">XP_002931652.2</a></p></td>
+<td><p>wdr65</p></td>
+<td><p>Xenopus  tropicalis</p></td>
+<td><p>0.0</p></td>
+<td><p>6.37e-05</p></td>
+<td><p>0.0703141</p></td>
+</tr>
+<tr class="row-odd"><td><p>Xetro.H00154.1</p></td>
+<td><p><a class="reference external" href="http://www.uniprot.org/uniprot/ASSY_XENTR">ASSY_XENTR</a></p></td>
+<td><p>ass1</p></td>
+<td><p>Xenopus  tropicalis</p></td>
+<td><p>0.0</p></td>
+<td><p>8.28e-05</p></td>
+<td><p>0.0703141</p></td>
+</tr>
+<tr class="row-even"><td><p>Xetro.D01805.1</p></td>
+<td><p><a class="reference external" href="http://www.uniprot.org/uniprot/Q05AZ0_XENTR">Q05AZ0_XENTR</a></p></td>
+<td><p>pde4b</p></td>
+<td><p>Xenopus  tropicalis</p></td>
+<td><p>0.0</p></td>
+<td><p>0.0001655</p></td>
+<td><p>0.1249529</p></td>
+</tr>
+<tr class="row-odd"><td><p>Xetro.A01770.1</p></td>
+<td><p><a class="reference external" href="http://www.uniprot.org/uniprot/Q5BKM8_XENTR">Q5BKM8_XENTR</a></p></td>
+<td><p>mccc2</p></td>
+<td><p>Xenopus  tropicalis</p></td>
+<td><p>0.0</p></td>
+<td><p>0.0004595</p></td>
+<td><p>0.2837521</p></td>
+</tr>
+<tr class="row-even"><td><p>Xetro.B00964.1</p></td>
+<td><p><a class="reference external" href="http://www.uniprot.org/uniprot/A4IGZ0_XENTR">A4IGZ0_XENTR</a></p></td>
+<td><p>gk</p></td>
+<td><p>Xenopus  tropicalis</p></td>
+<td><p>0.0</p></td>
+<td><p>0.0004368</p></td>
+<td><p>0.2837521</p></td>
+</tr>
+<tr class="row-odd"><td><p>Xetro.B01240.1</p></td>
+<td><p><a class="reference external" href="http://www.ncbi.nlm.nih.gov/gene/?term=XP_002935160.2">XP_002935160.2</a></p></td>
+<td><p>nudt15</p></td>
+<td><p>Xenopus  tropicalis</p></td>
+<td><p>0.0</p></td>
+<td><p>0.0005112</p></td>
+<td><p>0.289397</p></td>
+</tr>
+<tr class="row-even"><td><p>Xetro.I02043.1</p></td>
+<td><p><a class="reference external" href="http://www.uniprot.org/uniprot/Q6P8B9_XENTR">Q6P8B9_XENTR</a></p></td>
+<td><p>hadhb</p></td>
+<td><p>Xenopus  tropicalis</p></td>
+<td><p>0.0</p></td>
+<td><p>0.000556</p></td>
+<td><p>0.2905408</p></td>
+</tr>
+<tr class="row-odd"><td><p>Xetro.G00852.1</p></td>
+<td><p><a class="reference external" href="http://www.ncbi.nlm.nih.gov/gene/?term=XP_002937618.2">XP_002937618.2</a></p></td>
+<td><p>mmrn2</p></td>
+<td><p>Xenopus  tropicalis</p></td>
+<td><p>0.0</p></td>
+<td><p>0.0007002</p></td>
+<td><p>0.2994488</p></td>
+</tr>
+<tr class="row-even"><td><p>Xetro.I01292.1</p></td>
+<td><p><a class="reference external" href="http://www.uniprot.org/uniprot/Q28CD1_XENTR">Q28CD1_XENTR</a></p></td>
+<td><p>LOC548651</p></td>
+<td><p>Xenopus  tropicalis</p></td>
+<td><p>0.0</p></td>
+<td><p>0.0007053</p></td>
+<td><p>0.2994488</p></td>
+</tr>
+<tr class="row-odd"><td><p>Xetro.I01571.1</p></td>
+<td><p><a class="reference external" href="http://www.uniprot.org/uniprot/Q28CF2_XENTR">Q28CF2_XENTR</a></p></td>
+<td><p>shmt1</p></td>
+<td><p>Xenopus  tropicalis</p></td>
+<td><p>0.0</p></td>
+<td><p>0.0006822</p></td>
+<td><p>0.2994488</p></td>
+</tr>
+<tr class="row-even"><td><p>Xetro.I01290.1</p></td>
+<td><p><a class="reference external" href="http://www.uniprot.org/uniprot/A8E5S7_XENTR">A8E5S7_XENTR</a></p></td>
+<td><p>ocm.2</p></td>
+<td><p>Xenopus  tropicalis</p></td>
+<td><p>0.0</p></td>
+<td><p>0.0008519</p></td>
+<td><p>0.3347777</p></td>
+</tr>
+<tr class="row-odd"><td><p>Xetro.K05130.1</p></td>
+<td><p><a class="reference external" href="http://www.uniprot.org/uniprot/Q6DIW9_XENTR">Q6DIW9_XENTR</a></p></td>
+<td><p>pinx1</p></td>
+<td><p>Xenopus  tropicalis</p></td>
+<td><p>0.0</p></td>
+<td><p>0.0009491</p></td>
+<td><p>0.3347777</p></td>
+</tr>
+<tr class="row-even"><td><p>Xetro.A02916.1</p></td>
+<td><p><a class="reference external" href="http://www.uniprot.org/uniprot/A8E4W2_XENTR">A8E4W2_XENTR</a></p></td>
+<td><p>cpe</p></td>
+<td><p>Xenopus  tropicalis</p></td>
+<td><p>0.0</p></td>
+<td><p>0.0009857</p></td>
+<td><p>0.3347777</p></td>
+</tr>
+<tr class="row-odd"><td><p>Xetro.H01234.1</p></td>
+<td><p><a class="reference external" href="http://www.uniprot.org/uniprot/Q08D26_XENTR">Q08D26_XENTR</a></p></td>
+<td><p>c14orf159</p></td>
+<td><p>Xenopus  tropicalis</p></td>
+<td><p>0.0</p></td>
+<td><p>0.0009095</p></td>
+<td><p>0.3347777</p></td>
+</tr>
+<tr class="row-even"><td><p>Xetro.H00672.1</p></td>
+<td><p><a class="reference external" href="http://www.ncbi.nlm.nih.gov/gene/?term=XP_002934588.2">XP_002934588.2</a></p></td>
+<td><p>lonrf3</p></td>
+<td><p>Xenopus  tropicalis</p></td>
+<td><p>0.0</p></td>
+<td><p>0.0011083</p></td>
+<td><p>0.3585186</p></td>
+</tr>
+<tr class="row-odd"><td><p>Xetro.A00372.1</p></td>
+<td><p><a class="reference external" href="http://www.uniprot.org/uniprot/B2GUE7_XENTR">B2GUE7_XENTR</a></p></td>
+<td><p>nnt</p></td>
+<td><p>Xenopus  tropicalis</p></td>
+<td><p>0.0</p></td>
+<td><p>0.0012811</p></td>
+<td><p>0.3759351</p></td>
+</tr>
+<tr class="row-even"><td><p>Xetro.B01239.1</p></td>
+<td><p><a class="reference external" href="http://www.uniprot.org/uniprot/Q6P4J7_XENTR">Q6P4J7_XENTR</a></p></td>
+<td><p>sucla2</p></td>
+<td><p>Xenopus  tropicalis</p></td>
+<td><p>0.0</p></td>
+<td><p>0.0013282</p></td>
+<td><p>0.3759351</p></td>
+</tr>
+<tr class="row-odd"><td><p>Xetro.G02099.1</p></td>
+<td><p><a class="reference external" href="http://www.uniprot.org/uniprot/Q6DJA2_XENTR">Q6DJA2_XENTR</a></p></td>
+<td><p>ethe1</p></td>
+<td><p>Xenopus  tropicalis</p></td>
+<td><p>0.0</p></td>
+<td><p>0.0013245</p></td>
+<td><p>0.3759351</p></td>
+</tr>
+<tr class="row-even"><td><p>Xetro.A01951.1</p></td>
+<td><p><a class="reference external" href="http://www.uniprot.org/uniprot/Q642N4_XENTR">Q642N4_XENTR</a></p></td>
+<td><p>ltb4dh</p></td>
+<td><p>Xenopus  tropicalis</p></td>
+<td><p>0.0</p></td>
+<td><p>0.0015052</p></td>
+<td><p>0.4089947</p></td>
+</tr>
+<tr class="row-odd"><td><p>Xetro.E00065.1</p></td>
+<td><p><a class="reference external" href="http://www.ncbi.nlm.nih.gov/gene/?term=XP_002937878.1">XP_002937878.1</a></p></td>
+<td><p>bdh1</p></td>
+<td><p>Xenopus  tropicalis</p></td>
+<td><p>0.0</p></td>
+<td><p>0.0016498</p></td>
+<td><p>0.4178551</p></td>
+</tr>
+<tr class="row-even"><td><p>Xetro.J00457.1</p></td>
+<td><p><a class="reference external" href="http://www.ncbi.nlm.nih.gov/gene/?term=XP_002935581.2">XP_002935581.2</a></p></td>
+<td><p>slc4a1</p></td>
+<td><p>Xenopus  tropicalis</p></td>
+<td><p>0.0</p></td>
+<td><p>0.0016608</p></td>
+<td><p>0.4178551</p></td>
+</tr>
+<tr class="row-odd"><td><p>Xetro.G01378.1</p></td>
+<td><p><a class="reference external" href="http://www.uniprot.org/uniprot/Q6GLG0_XENTR">Q6GLG0_XENTR</a></p></td>
+<td><p>echs1</p></td>
+<td><p>Xenopus  tropicalis</p></td>
+<td><p>0.0</p></td>
+<td><p>0.0019416</p></td>
+<td><p>0.4682491</p></td>
+</tr>
+<tr class="row-even"><td><p>Xetro.A02087.1</p></td>
+<td><p><a class="reference external" href="http://www.uniprot.org/uniprot/Q5M7S4_XENTR">Q5M7S4_XENTR</a></p></td>
+<td><p>hiatl1</p></td>
+<td><p>Xenopus  tropicalis</p></td>
+<td><p>0.0</p></td>
+<td><p>0.001999</p></td>
+<td><p>0.4682491</p></td>
+</tr>
+<tr class="row-odd"><td><p>Xetro.B00176.1</p></td>
+<td><p><a class="reference external" href="http://www.uniprot.org/uniprot/Q0P4J8_XENTR">Q0P4J8_XENTR</a></p></td>
+<td><p>fam110d</p></td>
+<td><p>Xenopus  tropicalis</p></td>
+<td><p>0.0</p></td>
+<td><p>0.0022153</p></td>
+<td><p>0.468923</p></td>
+</tr>
+<tr class="row-even"><td><p>Xetro.B02404.3</p></td>
+<td><p><a class="reference external" href="http://www.uniprot.org/uniprot/Q6P304_XENTR">Q6P304_XENTR</a></p></td>
+<td><p>rab6a</p></td>
+<td><p>Xenopus  tropicalis</p></td>
+<td><p>0.0</p></td>
+<td><p>0.0022824</p></td>
+<td><p>0.468923</p></td>
+</tr>
+<tr class="row-odd"><td><p>Xetro.C01239.1</p></td>
+<td><p><a class="reference external" href="http://www.ncbi.nlm.nih.gov/gene/?term=XP_004915896.1">XP_004915896.1</a></p></td>
+<td><p>gfpt1</p></td>
+<td><p>isomerizing] 1 isoform X2 [Xenopus  tropicalis</p></td>
+<td><p>0.0</p></td>
+<td><p>0.0021119</p></td>
+<td><p>0.468923</p></td>
+</tr>
+<tr class="row-even"><td><p>Xetro.F01303.1</p></td>
+<td><p><a class="reference external" href="http://www.ncbi.nlm.nih.gov/gene/?term=XP_002932836.1">XP_002932836.1</a></p></td>
+<td><p>galnt15</p></td>
+<td><p>Xenopus  tropicalis</p></td>
+<td><p>0.0</p></td>
+<td><p>0.0022533</p></td>
+<td><p>0.468923</p></td>
+</tr>
+<tr class="row-odd"><td><p>Xetro.G00597.1</p></td>
+<td><p><a class="reference external" href="http://www.uniprot.org/uniprot/Q5FVZ6_XENTR">Q5FVZ6_XENTR</a></p></td>
+<td><p>cpn1</p></td>
+<td><p>Xenopus  tropicalis</p></td>
+<td><p>0.0</p></td>
+<td><p>0.002347</p></td>
+<td><p>0.468923</p></td>
+</tr>
+<tr class="row-even"><td><p>Xetro.A02978.1</p></td>
+<td><p><a class="reference external" href="http://www.uniprot.org/uniprot/Q6DF45_XENTR">Q6DF45_XENTR</a></p></td>
+<td><p>acsl1</p></td>
+<td><p>Xenopus  tropicalis</p></td>
+<td><p>0.0</p></td>
+<td><p>0.0024595</p></td>
+<td><p>0.4773538</p></td>
+</tr>
+<tr class="row-odd"><td><p>Xetro.K00910.1</p></td>
+<td><p><a class="reference external" href="http://www.uniprot.org/uniprot/ACT3_XENTR">ACT3_XENTR</a></p></td>
+<td><p>act3</p></td>
+<td><p>Xenopus  tropicalis</p></td>
+<td><p>0.0</p></td>
+<td><p>0.002688</p></td>
+<td><p>0.4955267</p></td>
+</tr>
+<tr class="row-even"><td><p>Xetro.A00385.1</p></td>
+<td><p><a class="reference external" href="http://www.uniprot.org/uniprot/Q66KJ2_XENTR">Q66KJ2_XENTR</a></p></td>
+<td><p>oxct1</p></td>
+<td><p>Xenopus  tropicalis</p></td>
+<td><p>0.0</p></td>
+<td><p>0.0028031</p></td>
+<td><p>0.4955267</p></td>
+</tr>
+<tr class="row-odd"><td><p>Xetro.A02393.1</p></td>
+<td><p><a class="reference external" href="http://www.ncbi.nlm.nih.gov/gene/?term=XP_002934038.1">XP_002934038.1</a></p></td>
+<td><p>lpl</p></td>
+<td><p>Xenopus  tropicalis</p></td>
+<td><p>0.0</p></td>
+<td><p>0.0028449</p></td>
+<td><p>0.4955267</p></td>
+</tr>
+<tr class="row-even"><td><p>Xetro.H01227.1</p></td>
+<td><p><a class="reference external" href="http://www.ncbi.nlm.nih.gov/gene/?term=NP_001016991.1">NP_001016991.1</a></p></td>
+<td><p>mrps10</p></td>
+<td><p>Xenopus  tropicalis</p></td>
+<td><p>0.0</p></td>
+<td><p>0.0027507</p></td>
+<td><p>0.4955267</p></td>
+</tr>
+<tr class="row-odd"><td><p>Xetro.E00916.1</p></td>
+<td><p><a class="reference external" href="http://www.uniprot.org/uniprot/Q6DD97_XENTR">Q6DD97_XENTR</a></p></td>
+<td><p>mpc1</p></td>
+<td><p>Xenopus  tropicalis</p></td>
+<td><p>0.0</p></td>
+<td><p>0.0029331</p></td>
+<td><p>0.4981171</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="links">
+<h2>Links<a class="headerlink" href="#links" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference external" href="http://trinityrnaseq.sourceforge.net">Trinity Sourceforge page</a></p></li>
+<li><p><a class="reference external" href="bioconductor.org/packages/release/bioc/html/DESeq.html">DESeq</a></p></li>
+<li><p><a class="reference external" href="http://www.bioconductor.org/packages/release/bioc/html/edgeR.html">edgeR</a></p></li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../filtered-analysis.html" class="btn btn-neutral float-right" title="Differential expression on filtered transcripts" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="star-assembly.html" class="btn btn-neutral float-left" title="Assembly" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, AJ Richards et al.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

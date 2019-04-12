@@ -1,0 +1,425 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Assembly &mdash; xenopus-supplement 1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Differential expression analysis" href="genome-guided-difexp.html" />
+    <link rel="prev" title="Trinity genome guided de novo assembly" href="genome-guided.html" />
+    <link href="../_static/style.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> xenopus-supplement
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../de-novo/de-novo.html">Trinity de novo assembly</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="genome-guided.html">Trinity genome-guided assembly</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="genome-guided.html#gene-set-generation">Gene set generation</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Assembly</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#trinity-assembly-without-a-reference-genome">Trinity assembly without a reference genome</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#map-the-reads-using-blast">Map the reads using BLAST</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#links">Links</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="genome-guided-difexp.html">Differential expression analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../geneset-analysis.html">Gene set analysis</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/reference.html">STAR reference assembly</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../filtered-analysis.html">Filtered differential expression analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../geneset-analysis.html">Gene set analysis</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../qc/qc.html">Quality control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../methods/database.html">Database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gs/gene-sets.html">Functional gene sets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../results/meta-data.html">Meta-analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">Works cited</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">xenopus-supplement</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="genome-guided.html">Trinity genome guided <em>de novo</em> assembly</a> &raquo;</li>
+        
+      <li>Assembly</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/genome-guided/genome-guided-assembly.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="assembly">
+<h1>Assembly<a class="headerlink" href="#assembly" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>llumina HiSeq 2500, CASAVA 1.8.2, RTA 1.13, Run ID: 130530_SN982_0225_AC20RLACXX</p>
+</div>
+<div class="section" id="trinity-assembly-without-a-reference-genome">
+<h2>Trinity assembly without a reference genome<a class="headerlink" href="#trinity-assembly-without-a-reference-genome" title="Permalink to this headline">¶</a></h2>
+<p>We carried out the genome-guided <em>de novo</em> transcriptome assembly with
+the software pacakge <a class="reference external" href="http://trinityrnaseq.sourceforge.net">Trinity</a>
+<a class="reference internal" href="../references.html#grabherr11" id="id1"><span>[Grabherr11]</span></a>.  The Trinity software suite consists of three main
+pieces:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>Inchworm</strong> - assembles the RNA-seq data into the unique
+sequences of transcripts, often generating full-length
+transcripts for a dominant isoform, but then reports just the
+unique portions of alternative ly spliced transcripts.</p></li>
+<li><p><strong>Chrysalis</strong> - clusters the Inchworm contigs into clusters and
+constructs complete de Bruijn graphs for each cluster. Each
+cluster represents the full transcriptonal complexity for a given
+gene (or sets o f genes that share sequences in
+common). Chrysalis then partitions the full read set among these
+disjoint graphs.</p></li>
+<li><p><strong>Butterfly</strong> then processes the individual graphs in parallel,
+tracing the paths that reads and pairs of reads take within the
+graph, ultimately reporting full-length transcripts for
+alternatively spliced isoforms, and teasing apart transcripts
+that corresponds to paralogous genes.</p></li>
+</ul>
+</div></blockquote>
+<div class="section" id="sequence-preprocessing">
+<h3>Sequence preprocessing<a class="headerlink" href="#sequence-preprocessing" title="Permalink to this headline">¶</a></h3>
+<p>A Python script was used to unzip, concatenate and trim the original reads via system calls (<a class="reference external" href="https://docs.python.org/2/library/subprocess.html">subprocess</a>).  We used <a class="reference external" href="http://www.usadellab.org/cms/?page=trimmomatic">Trimmomatic</a> <a class="reference internal" href="../references.html#bolger14" id="id2"><span>[Bolger14]</span></a> to trim reads based on quality with default settings (LEADING:5 TRAILING:5 MINLEN:36).</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference download internal" download="" href="../_downloads/7ce614c373997e925f665571725d6e50/preprocessReads.py"><code class="xref download docutils literal notranslate"><span class="pre">preprocessReads.py</span></code></a></p></li>
+</ul>
+</div></blockquote>
+<p>There are four output files.  Two are for the <em>paired</em> output where both reads passed, and two are for corresponding <em>unpaired</em> output where only one read passed (see manual).</p>
+</div>
+<div class="section" id="preparing-the-reference-genome">
+<h3>Preparing the reference genome<a class="headerlink" href="#preparing-the-reference-genome" title="Permalink to this headline">¶</a></h3>
+<p>See the section describing <a class="reference internal" href="../reference/reference-prep.html"><span class="doc">the preparation of the reference genome</span></a>.</p>
+</div>
+<div class="section" id="running-trinity">
+<h3>Running Trinity<a class="headerlink" href="#running-trinity" title="Permalink to this headline">¶</a></h3>
+<p>A Python script was used to generate the Trinity arguments.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference download internal" download="" href="../_downloads/7a70def6af22125e09f979a0140f9bf5/runTrinity.py"><code class="xref download docutils literal notranslate"><span class="pre">runTrinity.py</span></code></a></p></li>
+</ul>
+</div></blockquote>
+<p>The generalized Trinity command is shown below.</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>~$ <span class="nb">export</span> <span class="nv">TRINITY_HOME</span><span class="o">=</span><span class="s2">&quot;/usr/src/trinityrnaseq-2.0.4&quot;</span>
+~$ <span class="nv">$TRINITY_HOME</span>/Trinity --seqType fq --output /path/to/out --trimmomatic --full_cleanup
+   --SS_lib_type FR --max_memory 26G --CPU <span class="m">29</span> --normalize_reads
+   --genome_guided_bam /path/to/bam --genome_guided_max_intron <span class="m">10000</span>
+   --left left1.fastq,left2.fastq,left3.fastq
+   --right right1.fastq,right2.fastq,right3.fastq <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">|</span> tee ./run-trinity-gg.log
+</pre></div>
+</div>
+</div></blockquote>
+<p>This produces the output file <cite>./&lt;TRINITY_OUT&gt;/Trinity.fasta</cite> which we can run some basic statistics on.</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>~$ <span class="nb">export</span> <span class="nv">TRINITY_HOME</span><span class="o">=</span><span class="s2">&quot;/usr/src/trinityrnaseq-2.0.4&quot;</span>
+~$ <span class="nv">$TRINITY_HOME</span>/util/TrinityStats.pl ~/sequencing/xenopus/gg-trinity/Trinity-GG.fasta
+
+<span class="c1">################################</span>
+<span class="c1">## Counts of transcripts, etc.</span>
+<span class="c1">################################</span>
+Total trinity <span class="s1">&#39;genes&#39;</span>:41256
+Total trinity transcripts:52543
+Percent GC: <span class="m">45</span>.39
+
+<span class="c1">########################################</span>
+Stats based on ALL transcript contigs:
+<span class="c1">########################################</span>
+
+Contig N10: <span class="m">2365</span>
+Contig N20: <span class="m">1671</span>
+Contig N30: <span class="m">1277</span>
+Contig N40: <span class="m">969</span>
+Contig N50: <span class="m">737</span>
+
+Median contig length: <span class="m">383</span>
+Average contig: <span class="m">587</span>.46
+Total assembled bases: <span class="m">30866713</span>
+
+
+<span class="c1">#####################################################</span>
+<span class="c1">## Stats based on ONLY LONGEST ISOFORM per &#39;GENE&#39;:</span>
+<span class="c1">#####################################################</span>
+
+Contig N10: <span class="m">1989</span>
+Contig N20: <span class="m">1385</span>
+Contig N30: <span class="m">999</span>
+Contig N40: <span class="m">743</span>
+Contig N50: <span class="m">574</span>
+
+Median contig length: <span class="m">349</span>
+Average contig: <span class="m">510</span>.50
+Total assembled bases: <span class="m">21061251</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Trinity groups transcripts into clusters that are loosely referred to
+as a gene. The accession identifiers in the
+./trinity_out_dir/Trinity.fasta encode gene and isoform
+information. Per the documentation (see links below) if we have the
+accession &gt;c0_g1_i1 this refers to Trinity read cluster c0, gene g1
+and isoform i1. The gene identifier in this case is c0_g1.</p>
+</div>
+</div>
+<div class="section" id="map-the-reads-using-blast">
+<h2>Map the reads using BLAST<a class="headerlink" href="#map-the-reads-using-blast" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><p>First, we BLAST the transcript against SwissProt (<cite>-c</cite> can be used to initiate cluster mode)</p>
+<ul class="simple">
+<li><p><a class="reference download internal" download="" href="../_downloads/aba7dae162c0c9e00b3b311ad3837e79/runBlast.py"><code class="xref download docutils literal notranslate"><span class="pre">runBlast.py</span></code></a></p></li>
+</ul>
+</li>
+<li><p>Then, these data were are parsed and summarized.</p>
+<ul class="simple">
+<li><p><a class="reference download internal" download="" href="../_downloads/db9a3c0d30ed774fd3aee6fce28839df/runBlastParallelParse.py"><code class="xref download docutils literal notranslate"><span class="pre">runBlastParse.py</span></code></a></p></li>
+<li><p><a class="reference download internal" download="" href="../_downloads/71aa5629b2560d093cb39aba244a6586/runBlastSummarize.py"><code class="xref download docutils literal notranslate"><span class="pre">runBlastSummarize.py</span></code></a></p></li>
+<li><p><a class="reference download internal" download="" href="../_downloads/a475f44e0a7e209fe8fa0dbd29c5d42a/showTaxaSummary.py"><code class="xref download docutils literal notranslate"><span class="pre">showTaxaSummary.py</span></code></a></p></li>
+</ul>
+</li>
+</ol>
+<div class="section" id="all-of-swissprot">
+<h3>All of SwissProt<a class="headerlink" href="#all-of-swissprot" title="Permalink to this headline">¶</a></h3>
+<p>The best hit by isoform.</p>
+<blockquote>
+<div><div class="align-center figure">
+<a class="reference internal image-reference" href="../_images/gg-trinity-blast-pie-isoforms.png"><img alt="genome-guided trinity blast taxa by gene" src="../_images/gg-trinity-blast-pie-isoforms.png" style="width: 630.0px; height: 489.99999999999994px;" /></a>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>SwissProt - isoforms
+transcripts: 42967
+genes: 15672
+</pre></div>
+</div>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Genes correspond to unique gene identifiers, but the number includes orthalogs</p>
+</div>
+</div>
+<div class="section" id="xenopus-restricted-swissprot">
+<h3>Xenopus restricted SwissProt<a class="headerlink" href="#xenopus-restricted-swissprot" title="Permalink to this headline">¶</a></h3>
+<p>The best hits only considering <em>Xenopus sp.</em></p>
+<blockquote>
+<div><div class="align-center figure">
+<a class="reference internal image-reference" href="../_images/gg-trinity-blast-pie-frog.png"><img alt="genome-guided trinity blast taxa by isoform" src="../_images/gg-trinity-blast-pie-frog.png" style="width: 630.0px; height: 489.99999999999994px;" /></a>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>SwissProt [8355,8364] - isoforms
+transcripts: 19490
+genes: 3456
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="blast-against-xenopus-amino-acid-sequences">
+<h3>BLAST against Xenopus amino acid sequences<a class="headerlink" href="#blast-against-xenopus-amino-acid-sequences" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>~$ wget ftp://ftp.ncbi.nlm.nih.gov/genomes/Xenopus_Silurana_tropicalis/protein/protein.fa.gz
+~$ gunzip -c protein.fa.gz &gt; xtropicalis.fasta
+~$ makeblastdb -in xtropicalis.fasta -dbtype &#39;prot&#39; -out xtropicalis
+~$ less xtropicalis.fasta | grep gi &gt; foo.txt &amp;&amp; wc -l foo.txt
+</pre></div>
+</div>
+</div></blockquote>
+<p>There were 28495 amino acid sequences in the fasta file.</p>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>X. tropicalis - isoforms
+transcripts: 44682
+genes: 11643
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="links">
+<h2>Links<a class="headerlink" href="#links" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference external" href="https://wiki.hpcc.msu.edu/display/Bioinfo/Pipeline+for+Illumina+Data">Example pipeline</a></p></li>
+<li><p><a class="reference external" href="ftp://ftp.xenbase.org/pub/Genomics/JGI/">Xenbase files</a></p></li>
+<li><p><a class="reference external" href="http://trinityrnaseq.sourceforge.net">Trinity Sourceforge page</a></p></li>
+<li><p><a class="reference external" href="http://www.usadellab.org/cms/?page=trimmomatic">Trimmomatic</a></p></li>
+<li><p><a class="reference external" href="http://trinityrnaseq.sourceforge.net/#trinity_output">Trinity output</a></p></li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="genome-guided-difexp.html" class="btn btn-neutral float-right" title="Differential expression analysis" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="genome-guided.html" class="btn btn-neutral float-left" title="Trinity genome guided de novo assembly" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, AJ Richards et al.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

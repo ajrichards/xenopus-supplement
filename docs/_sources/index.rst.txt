@@ -33,6 +33,22 @@ ________________________________
    :caption: Contents:
 	     
    Trinity de novo assembly  <de-novo/de-novo>
+   Trinity genome-guided assembly <genome-guided/genome-guided>
+   STAR reference assembly <reference/reference>
+   Filtered differential expression analysis <filtered-analysis>
+   Gene set analysis <geneset-analysis>
+
+
+Additional contents
+____________________
+
+.. toctree::
+   :maxdepth: 1
+
+   Quality control <qc/qc>
+   Database <methods/database>
+   Functional gene sets <gs/gene-sets>
+   Meta-analysis <results/meta-data>
    references
       
 Indices and tables

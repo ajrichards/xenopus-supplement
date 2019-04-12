@@ -1,0 +1,270 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Database &mdash; xenopus-supplement 1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Gene sets" href="../gs/gene-sets.html" />
+    <link rel="prev" title="Contaminant check" href="../qc/contaminant-check.html" />
+    <link href="../_static/style.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> xenopus-supplement
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../de-novo/de-novo.html">Trinity de novo assembly</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genome-guided/genome-guided.html">Trinity genome-guided assembly</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/reference.html">STAR reference assembly</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../filtered-analysis.html">Filtered differential expression analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../geneset-analysis.html">Gene set analysis</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../qc/qc.html">Quality control</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Database</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#about-the-database">About the database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#database-contents">Database contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#links">Links</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../gs/gene-sets.html">Functional gene sets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../results/meta-data.html">Meta-analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">Works cited</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">xenopus-supplement</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Database</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/methods/database.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="database">
+<h1>Database<a class="headerlink" href="#database" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="about-the-database">
+<h2>About the database<a class="headerlink" href="#about-the-database" title="Permalink to this headline">¶</a></h2>
+<p>The databased we used for this analysis used <a class="reference external" href="http://www.postgresql.org">PostgreSQL</a> and several python modules, including the object <a class="reference external" href="http://en.wikipedia.org/wiki/Object-relational_mapping">relational mapper</a>  provided by <a class="reference external" href="http://www.sqlalchemy.org">SQLAlchemy</a>.  The main purpose of the database is to be able to handle at a detailed level Gene Ontology <a class="reference internal" href="../references.html#ashburner00" id="id1"><span>[Ashburner00]</span></a> information. Here is the relational schema produced with a tool called <a class="reference external" href="https://pypi.python.org/pypi/sqlalchemy_schemadisplay">sqlalchemy_schemadisplay</a>. The database population scripts along with a number of classes to interface with the data are made possible through a project called <a class="reference external" href="https://github.com/ajrichards/hts-integrate">hts-integrate</a>.</p>
+<div class="align-center figure">
+<a class="reference internal image-reference" href="../_images/dbschema.png"><img alt="database schema" src="../_images/dbschema.png" style="width: 494.9px; height: 277.9px;" /></a>
+</div>
+</div>
+<div class="section" id="database-contents">
+<h2>Database contents<a class="headerlink" href="#database-contents" title="Permalink to this headline">¶</a></h2>
+<p>The following files were downloaded on <strong>September 15, 2014</strong>.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference external" href="ftp://ftp.geneontology.org/pub/go/ontology/go.obo">go.obo</a></p></li>
+<li><p><a class="reference external" href="ftp://ftp.ncbi.nlm.nih.gov/pub/taxonomy/taxdump.tar.gz">taxdump.tar.gz</a></p></li>
+<li><p><a class="reference external" href="ftp://ftp.ncbi.nlm.nih.gov/gene/DATA/gene_info.gz">gene_info.gz</a></p></li>
+<li><p><a class="reference external" href="ftp://ftp.ncbi.nlm.nih.gov/gene/DATA/gene2go.gz">gene2go.gz</a></p></li>
+<li><p><a class="reference external" href="ftp://ftp.ncbi.nlm.nih.gov/gene/DATA/gene2refseq.gz">gene2refseq.gz</a></p></li>
+<li><p><a class="reference external" href="ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/UNIPROT/gene_association.goa_uniprot.gz">gene_association.goa_uniprot.gz</a></p></li>
+<li><p><a class="reference external" href="ftp://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/idmapping.dat.gz">idmapping.dat.gz</a></p></li>
+<li><p><a class="reference external" href="ftp://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/complete/uniprot_sprot.fasta.gz">uniprot_sprot.fasta.gz</a></p></li>
+<li><p><a class="reference external" href="ftp://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/complete/uniprot_trembl.fasta.gz">uniprot_trembl.fasta.gz</a></p></li>
+</ul>
+</div></blockquote>
+<p>The uniprot and gene centric data from these files was parsed and used to populate the database.  The number of rows in each of the tables are shown below.</p>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>There are 1262260 entries in the taxa table
+There are 681732 entries in the genes table
+There are 777608 entries in the uniprot table
+There are 42627 entries in the go_terms table
+There are 7463568 entries in the go_annotations table
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="links">
+<h2>Links<a class="headerlink" href="#links" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference external" href="http://geneontology.org/">Gene Ontology</a></p></li>
+<li><p><a class="reference external" href="http://www.geneontology.org/GO.format.gaf-2_0.shtml">GO annotation file format</a></p></li>
+<li><p><a class="reference external" href="http://www.geneontology.org/gene-associations/readme/goa.README">GO annotation README</a></p></li>
+<li><p><a class="reference external" href="http://www.ncbi.nlm.nih.gov/books/NBK21091/table/ch18.T.refseq_accession_numbers_and_mole/?report=objectonly">Refseq accession number and molecule types</a></p></li>
+<li><p><a class="reference external" href="ftp://ftp.ncbi.nlm.nih.gov/gene/DATA/README">NCBI FTP README</a></p></li>
+<li><p><a class="reference external" href="http://www.ebi.ac.uk/uniprot">Uniprot database</a></p></li>
+<li><p><a class="reference external" href="ftp://ftp.ebi.ac.uk/pub/databases/uniprot/knowledgebase/README">Uniprot README</a></p></li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../gs/gene-sets.html" class="btn btn-neutral float-right" title="Gene sets" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../qc/contaminant-check.html" class="btn btn-neutral float-left" title="Contaminant check" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, AJ Richards et al.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
