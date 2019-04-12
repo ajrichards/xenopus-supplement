@@ -33,6 +33,7 @@ ________________________________
    :caption: Contents:
 	     
    Trinity de novo assembly  <de-novo/de-novo>
+   Trinity genome-guided assembly <genome-guided/genome-guided>
    references
       
 Indices and tables
